@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thêm khóa học</title>
+</head>
+<body>
+<h1>Form Khóa học</h1>
+<form th:action="@{/admin/courses/save}" th:object="${course}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label>Tên khóa học:</label>
+    <input type="text" th:field="*{name}" required /><br/>
+
+    <label>Số tín chỉ:</label>
+    <input type="number" th:field="*{credits}" required /><br/>
+
+    <button type="submit">Lưu</button>
+</form>
+<br/>
+<a href="/admin/courses">Quay lại danh sách</a>
+</body>
+</html>

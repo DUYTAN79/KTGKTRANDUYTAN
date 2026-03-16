@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<h1>Khóa học của tôi</h1>
+<div th:each="enroll : ${enrollments}">
+    <h3 th:text="${enroll.course.name}">Tên môn</h3>
+
+    <img th:src="${enroll.course.imageUrl != null ? enroll.course.imageUrl : '/images/default.jpg'}"
+         alt="Course" style="width:100px;">
+
+    <p>Giáo viên:
+        <span th:text="${enroll.course.teacherName != null ? enroll.course.teacherName : 'Chưa có thông tin'}"></span>
+    </p>
+
+    <p>Tín chỉ: <span th:text="${enroll.course.credits}"></span></p>
+</div>
+</body>
+</html>

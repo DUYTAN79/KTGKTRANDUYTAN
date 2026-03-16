@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Chủ - Danh sách khóa học</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .course-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+        .course-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 250px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+        }
+        .course-img { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; }
+        .btn-enroll { background-color: #28a745; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 5px; width: 100%; }
+        .btn-enroll:hover { background-color: #218838; }
+        nav { margin-bottom: 20px; padding: 10px; background: #f8f9fa; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/home">Trang chủ</a> |
+    <a href="/my-courses">Khóa học của tôi</a> |
+    <a href="/logout">Đăng xuất</a>
+</nav>
+
+<h1>Danh sách các khóa học hiện có</h1>
+
+<div th:if="${courses == null or courses.empty}">
+    <p>Hiện tại chưa có khóa học nào được mở.</p>
+</div>
+
+<div class="course-container">
+    <div th:each="course : ${courses}" class="course-card">
+        <img th:src="${course.imageUrl != null ? course.imageUrl : '/images/default.jpg'}"
+             alt="Course Image" class="course-img">
+
+        <h3 th:text="${course.name}">Tên môn</h3>
+        <p>Giáo viên: <strong th:text="${course.teacherName}">Tên GV</strong></p>
+        <p>Tín chỉ: <span th:text="${course.credits}">0</span></p>
+
+        <form th:action="@{'/enroll/' + ${course.id}}" method="post">
+            <button type="submit" class="btn-enroll">Đăng ký ngay</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
